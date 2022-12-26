@@ -4,14 +4,17 @@ import urllib.request
 
 openai.api_key = os.getenv("TOKEN_GPT")
 retorno = openai.Image.create(
-  prompt="Biscoito de chocolate",
+  prompt="Arvore cortada com grandes raizes",
   n=2,
   size="1024x1024"
 )
 print(retorno)
+
+# pega o url
 url = retorno["data"][0]["url"]
 
-retorno = urllib.request.urlopen(url)
-
-with open('/home/carlinhoshk/dev/estudos-api-openIA/API_IMAGEM_REMIX/saida-imagem-dados.imagem.jpg', 'wb') as f:
-    f.write(retorno.read())
+# abre o link do url
+imagem_lida = urllib.request.urlopen(url)
+# salva a imagem do link
+with open('/home/carlinhoshk/dev/estudos-api-openIA/API_IMAGEM_REMIX/saida-imagem-dados/imagem.jpg', 'wb') as f:
+    f.write(imagem_lida.read())
